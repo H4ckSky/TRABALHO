@@ -1,0 +1,35 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7.8 
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+  run-script:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Dia.py
+        run: python TRABALHO/TrabalhoFacul/.github/facul/Dia.py
