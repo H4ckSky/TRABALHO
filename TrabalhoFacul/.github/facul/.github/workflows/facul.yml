@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -18,5 +18,19 @@ jobs:
         with:
           python-version: 3.7.8 
 
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+  run-script:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Run Dia.py
         run: python Dia.py
